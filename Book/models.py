@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.validators import MinValueValidator, MaxValueValidator
 
 
 class Book(models.Model):
@@ -6,6 +7,8 @@ class Book(models.Model):
     author = models.CharField(max_length=100)
     translator = models.CharField(max_length=100, blank=True, null=True)
     publisher = models.CharField(max_length=100)
+    rating = models.FloatField(validators=[MinValueValidator(0), MaxValueValidator(5)],
+                               default=0, help_text="0 to 5")
     year = models.IntegerField()
     pages = models.IntegerField(blank=True, null=True)
     description = models.TextField(blank=True, null=True)
@@ -15,3 +18,4 @@ class Book(models.Model):
 
     class Meta:
         verbose_name = 'Book'
+
