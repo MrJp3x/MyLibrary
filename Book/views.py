@@ -9,8 +9,7 @@ from django.contrib.auth.models import User
 from Book.serializer import BookSerializer
 
 
-class BookView(generics.GenericAPIView):
+class BookView(generics.ListAPIView):
     serializer_class = BookSerializer
-
-
+    queryset = Book.objects.order_by('id').all()
 
