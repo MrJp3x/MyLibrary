@@ -1,12 +1,16 @@
 # from msilib.schema import ListView
+
 from django.shortcuts import render, HttpResponse
 from django.views import View
 from Book.models import Book
+from rest_framework import generics
+from django.contrib.auth.models import User
+
+from Book.serializer import BookSerializer
 
 
-class BookListView(View):
-    model = Book
-    def get(self, request):
-        return HttpResponse('Book List')
+class BookView(generics.GenericAPIView):
+    serializer_class = BookSerializer
+
 
 
